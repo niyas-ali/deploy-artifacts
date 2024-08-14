@@ -57,4 +57,4 @@ jobs:
           dotnet build -c Release --no-restore
           dotnet pack -c Release -o ./nuget
           ls -p ./nuget
-          dotnet nuget push --source https://github.com/${{github.actor}} ./nuget
+          dotnet nuget push --source https://github.com/${{github.actor}} ./nuget/*
