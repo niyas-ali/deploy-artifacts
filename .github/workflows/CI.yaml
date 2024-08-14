@@ -9,7 +9,7 @@ on:
 
 env:
     config: |
-        {
+        '{
             "clouds1": {
                 "aws": "ec2",
                 "azure": "functions"
@@ -18,7 +18,7 @@ env:
                 "aws": "ec2",
                 "azure": "functions"
             }
-        }
+        }'
 jobs:
   set-matrix:
     runs-on: ubuntu-latest
