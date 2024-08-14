@@ -52,6 +52,8 @@ jobs:
 
       - name: Build
         run: |
+          pwd
+          ls
           dotnet restore 
           dotnet build 
           nuget pack -OutputDirectory ./nuget
