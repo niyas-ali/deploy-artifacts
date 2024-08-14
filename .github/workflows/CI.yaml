@@ -53,10 +53,8 @@ jobs:
       - name: Build
         working-directory: sample-dotnetcore-library
         run: |
-          pwd
-          ls
           dotnet restore 
           dotnet build -c Release --no-restore
           dotnet pack -c Release -o ./nuget
           ls -p ./nuget
-          dotnet nuget push --source https://github.com/${{github.}} ./nuget
+          dotnet nuget push --source https://github.com/${{github.actor}} ./nuget
