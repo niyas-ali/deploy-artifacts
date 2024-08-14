@@ -9,7 +9,7 @@ on:
 
 env:
     config: |
-        '{
+        {
             "clouds1": {
                 "aws": "ec2",
                 "azure": "functions"
@@ -18,15 +18,16 @@ env:
                 "aws": "ec2",
                 "azure": "functions"
             }
-        }'
+        }
 jobs:
   set-matrix:
     runs-on: ubuntu-latest
     steps:
         - name: matrix
           run: |
-            json=$(echo ${{env.config}} | jq -r .clouds1)
-            echo aws=$(echo $json | jq -r .aws) >> GITHUB_OUTPUT
+            json=$(echo "${{env.config}}" | jq -r '.clouds1')
+            aaws_value=$(echo "$json" | jq -r '.aws')
+            echo "aws=${aws_value}" >> $GITHUB_ENV
     outputs:
       aws: ${{steps.matrix.outputs.aws}}
 
