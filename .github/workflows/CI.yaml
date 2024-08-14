@@ -59,3 +59,4 @@ jobs:
           dotnet build -c Release --no-restore
           dotnet pack -c Release -o ./nuget
           ls -p ./nuget
+          dotnet nuget push --Source https://github.com/${{github.actor}}/deploy-artifacts ./nuget
