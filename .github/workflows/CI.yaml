@@ -1,0 +1,51 @@
+name: CI
+on:
+  workflow_dispatch:
+    inputs:
+      appName:
+        description: 'input app name'
+        required: true
+        type: string
+
+env:
+    config: |
+        {
+            "clouds1": {
+                "aws": "ec2",
+                "azure": "functions"
+            },
+            "clouds2": {
+                "aws": "ec2",
+                "azure": "functions"
+            }
+        }
+jobs:
+  set-matrix:
+    runs-on: ubuntu-latest
+    steps:
+        - name: matrix
+          run: |
+            json=$(echo ${{env.config}} | jq -r .clouds1)
+            echo aws=$(echo $json | jq -r .aws) >> GITHUB_OUTPUT
+    outputs:
+      aws: ${{steps.matrix.outputs.aws}}
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [set-matrix]
+    steps:
+      # - uses: actions/checkout@v4
+      - name: Clone repo
+        run: |
+            echo ${{needs.set-matrix.outputs.aws}} output data
+            git clone https://github.com/niyas-ali/sample-dotnetcore-library.git
+            git pull origin dev
+            git checkout dev
+            git status
+
+      - name: Build
+        run: |
+          dotnet restore 
+          dotnet build 
+          nuget pack -OutputDirectory ./nuget
+          ls -p ./nuget
