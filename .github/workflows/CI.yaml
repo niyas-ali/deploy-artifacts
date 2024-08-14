@@ -4,7 +4,7 @@ on:
     inputs:
       appName:
         description: 'input app name'
-        required: true
+        required: false
         type: string
 
 env:
@@ -51,6 +51,7 @@ jobs:
             git status
 
       - name: Build
+        working-directory: sample-dotnetcore-library
         run: |
           pwd
           ls
