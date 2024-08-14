@@ -24,6 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - name: matrix
+          id: matrix
           run: |
             json=$(echo '${{env.config}}' | jq -r '.clouds1')
             aws_value=$(echo $json | jq -r '.aws')
