@@ -34,8 +34,8 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs: [set-matrix]
     if: ${{needs.set-matrix.outputs.aws == 'ec2'}}
+    needs: [set-matrix]
     steps:
       # - uses: actions/checkout@v4
       - name: Setup dotnet
@@ -51,11 +51,11 @@ jobs:
             git checkout dev
             git status
 
-      - name: Build
-        working-directory: sample-dotnetcore-library
-        run: |
-          dotnet restore 
-          dotnet build -c Release --no-restore
-          dotnet pack -c Release -o ./nuget
-          ls -p ./nuget
-          dotnet nuget push --source https://nuget.pkg.github.com/${{github.actor}} ./nuget/*
+      # - name: Build
+      #   working-directory: sample-dotnetcore-library
+      #   run: |
+      #     dotnet restore 
+      #     dotnet build -c Release --no-restore
+      #     dotnet pack -c Release -o ./nuget
+      #     ls -p ./nuget
+      #     dotnet nuget push --source https://nuget.pkg.github.com/${{github.actor}} ./nuget/*
