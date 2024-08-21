@@ -27,7 +27,7 @@ jobs:
           id: matrix
           run: |
             json=$(echo '${{env.config}}' | jq -r '.clouds1')
-            echo "aws=aws_value=$(echo $json | jq -r '.aws')" >> $GITHUB_OUTPUT
+            echo "aws=$(echo $json | jq -r '.aws')" >> $GITHUB_OUTPUT
     outputs:
       aws: ${{steps.matrix.outputs.aws}}
 
