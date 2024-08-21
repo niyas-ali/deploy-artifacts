@@ -26,14 +26,14 @@ jobs:
         - name: matrix
           id: matrix
           run: |
-            json=$(echo '${{env.config}}' | jq -r '.clouds1')
-            echo "aws=$(echo $json | jq -r '.aws')" >> $GITHUB_OUTPUT
+            json=$(echo '${{env.config}}' | jq -r .clouds1)
+            echo "aws=$(echo $json | jq -r .aws)" >> $GITHUB_OUTPUT
     outputs:
       aws: ${{steps.matrix.outputs.aws}}
 
   build:
     runs-on: ubuntu-latest
-    if: ${{needs.set-matrix.outputs.aws == 'ec3'}}
+    if: ${{needs.set-matrix.outputs.aws == 'ec2'}}
     needs: [set-matrix]
     steps:
       # - uses: actions/checkout@v4
