@@ -33,7 +33,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    if: ${{needs.set-matrix.outputs.aws == 'ec2'}}
+    if: ${{needs.set-matrix.outputs.aws == 'ec3'}}
     needs: [set-matrix]
     steps:
       # - uses: actions/checkout@v4
